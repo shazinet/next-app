@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { CldUploadWidget, CldImage } from "next-cloudinary";
-import { sources } from "next/dist/compiled/webpack/webpack";
 
 interface CloudinaryResult {
   public_id: string;
