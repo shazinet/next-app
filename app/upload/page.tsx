@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { CldUploadWidget, CldImage } from "next-cloudinary";
+import { sources } from "next/dist/compiled/webpack/webpack";
 
 interface CloudinaryResult {
   public_id: string;
@@ -16,6 +17,11 @@ const UploadPage = () => {
       )}
       <CldUploadWidget
         uploadPreset="rbtkzpqv"
+        options={{
+          sources: ["local"],
+          multiple: false,
+          maxFiles: 5,
+        }}
         onSuccess={(result, widget) => {
           const info = result.info as CloudinaryResult;
           setPublicId(info.public_id);
