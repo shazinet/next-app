@@ -1,6 +1,9 @@
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GitHubProvider from "next-auth/providers/github";
+import TwitterProvider from "next-auth/providers/twitter";
+import WordpressProvider from "next-auth/providers/wordpress";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/prisma/client";
 import { NextAuthOptions } from "next-auth";
@@ -38,6 +41,21 @@ export const authOptions: NextAuthOptions = {
 
         return passwordsMatch ? user : null;
       },
+    }),
+    WordpressProvider({
+      clientId: process.env.WORDPRESS_CLIENT_ID!,
+      clientSecret: process.env.WORDPRESS_CLIENT_SECRET!,
+      type: "oauth",
+      version: "2.0",
+    }),
+    TwitterProvider({
+      clientId: process.env.TWITTER_ID!,
+      clientSecret: process.env.TWITTER_SECRET!,
+      version: "2.0", // opt-in to Twitter OAuth 2.0
+    }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID!,
+      clientSecret: process.env.GITHUB_SECRET!,
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
